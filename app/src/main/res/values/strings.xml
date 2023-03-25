@@ -1,3 +1,6 @@
-<resources>
-    <string name="app_name">DimondEyeJava</string>
+<resources
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <string name="app_name">DiamondEye</string>
+    <string name="app_name_diamond">Diamond</string>
+    <string name="app_name_eye">Eye</string>
 </resources>
