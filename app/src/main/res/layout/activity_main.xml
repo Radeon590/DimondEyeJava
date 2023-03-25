@@ -43,7 +43,16 @@
             android:gravity="center"
             android:textColor="@color/black"
             android:text="@string/app_name_eye"/>
-        <androidx.constraintlayout.widget.ConstraintLayout
+
+        <Button
+            android:layout_width="48dp"
+            android:layout_height="52dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="25dp"
+            android:text="test"
+            android:onClick="switchMainLayoutDrawer"/>
+        <!--<androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="45dp"
             android:layout_height="52dp"
             android:layout_alignParentRight="true"
@@ -79,11 +88,37 @@
                 app:layout_constraintBottom_toBottomOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+        -->
 
     </RelativeLayout>
-    <View
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/main_layout_drawer"
         android:layout_width="match_parent"
-        android:layout_height="5dp"
-        android:background="@color/dark_red" />
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="@color/dark_red" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_gravity="left"
+            android:layout_marginLeft="-64dp"
+            android:background="@color/white">
+
+
+
+        </LinearLayout>
+    </androidx.drawerlayout.widget.DrawerLayout>
 
 </LinearLayout>
