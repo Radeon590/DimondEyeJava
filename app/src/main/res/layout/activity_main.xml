@@ -98,6 +98,24 @@
         android:layout_height="match_parent">
 
         <LinearLayout
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="-64dp"
+            android:background="@color/white">
+
+            <TextView
+                android:layout_width="300dp"
+                android:layout_height="200dp"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:fontFamily="@font/mts_sans_bold"
+                android:textSize="50sp"
+                android:textColor="@color/black"
+                android:text="@string/how_it_works"/>
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -109,16 +127,7 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
-            android:layout_gravity="left"
-            android:layout_marginLeft="-64dp"
-            android:background="@color/white">
 
-
-
-        </LinearLayout>
     </androidx.drawerlayout.widget.DrawerLayout>
 
 </LinearLayout>

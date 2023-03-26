@@ -1,6 +1,10 @@
-<resources
-    xmlns:android="http://schemas.android.com/apk/res/android">
-    <string name="app_name">DiamondEye</string>
-    <string name="app_name_diamond">Diamond</string>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <string name="app_name">DimondEye</string>
+    <string name="app_name_diamond">Dimond</string>
     <string name="app_name_eye">Eye</string>
+    <string name="how_it_works">Как это работает?</string>
+    <string name="developers">Разработчики</string>
+    <string name="back">Назад</string>
+    <string name="load">Загрузить</string>
+    <string name="loaded_files">Загруженные файлы</string>
 </resources>
