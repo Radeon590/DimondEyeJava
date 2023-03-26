@@ -22,7 +22,7 @@
         android:textSize="32sp"
         android:fontFamily="@font/mts_sans_medium"
         android:text="@string/load"
-        android:onClick="showGallery"/>
+        android:onClick="showFiles"/>
     <Button
         android:id="@+id/back_button"
         android:layout_width="match_parent"
