@@ -7,4 +7,5 @@
     <string name="back">Назад</string>
     <string name="load">Загрузить</string>
     <string name="loaded_files">Загруженные файлы</string>
+    <string name="loading">Загружается</string>
 </resources>

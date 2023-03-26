@@ -53,7 +53,7 @@
             android:text="test"
             android:onClick="switchMainLayoutDrawer"/>
         <!--<androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="45dp"
+            android:layout_width="48dp"
             android:layout_height="52dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
