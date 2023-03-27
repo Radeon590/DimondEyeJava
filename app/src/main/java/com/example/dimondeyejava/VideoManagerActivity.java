@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.res.ResourcesCompat;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -12,10 +13,12 @@ import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.provider.OpenableColumns;
 import android.text.Layout;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -72,36 +75,42 @@ public class VideoManagerActivity extends AppCompatActivity {
         nameText.setTypeface(ResourcesCompat.getFont(this, R.font.mts_sans_bold));
         ConstraintLayout.LayoutParams nameTextParams
                 = new ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.MATCH_PARENT,
-                75);
+                (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 75, getResources().getDisplayMetrics()));
         nameTextParams.topToTop = ConstraintLayout.LayoutParams.PARENT_ID;
+        int nameTextId = View.generateViewId();
+        nameText.setId(nameTextId);
         nameText.setLayoutParams(nameTextParams);
         //
         TextView statusText = new TextView(this);
         statusText.setText(status);
         statusText.setGravity(Gravity.CENTER);
         statusText.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        statusText.setTextColor(getResources().getColor(R.color.black, null));
+        statusText.setTextColor(getResources().getColor(R.color.red, null));
         statusText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 32);
         statusText.setTypeface(ResourcesCompat.getFont(this, R.font.mts_sans_bold));
         ConstraintLayout.LayoutParams statusTextParams
                 = new ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.MATCH_PARENT,
-                75);
-        statusTextParams.bottomToBottom = ConstraintLayout.LayoutParams.PARENT_ID;
+                (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 75, getResources().getDisplayMetrics()));
+        statusTextParams.topToBottom = nameTextId;
+        int statusTextId = View.generateViewId();
+        statusText.setId(statusTextId);
         statusText.setLayoutParams(statusTextParams);
         //
         ConstraintLayout constraintLayout = new ConstraintLayout(this);
-        ConstraintLayout.LayoutParams constraintLayoutParams = new ConstraintLayout.LayoutParams(
-                ConstraintLayout.LayoutParams.MATCH_PARENT, 150);
+        LinearLayout.LayoutParams constraintLayoutParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 150, getResources().getDisplayMetrics()));
         constraintLayout.setLayoutParams(constraintLayoutParams);
         constraintLayout.addView(nameText);
         constraintLayout.addView(statusText);
         //
         View lineView = new View(this);
         lineView.setBackgroundColor(getResources().getColor(R.color.dark_red, null));
-        ConstraintLayout.LayoutParams lineViewParams = new ConstraintLayout.LayoutParams(
-                ConstraintLayout.LayoutParams.MATCH_PARENT,
-                5
+        LinearLayout.LayoutParams lineViewParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5, getResources().getDisplayMetrics())
         );
+        lineView.setLayoutParams(lineViewParams);
         //
         LinearLayout linearLayout = findViewById(R.id.videos_list);
         linearLayout.addView(constraintLayout);
@@ -134,4 +143,26 @@ public class VideoManagerActivity extends AppCompatActivity {
 
         return ((path == null || path.isEmpty()) ? (uri.getPath()) : path);
     }
+
+    /*public static String getFileName(Context context, Uri uri) {
+        String result = null;
+        if (uri.getScheme().equals("content")) {
+            Cursor cursor = context.getContentResolver().query(uri, null, null, null, null);
+            try {
+                if (cursor != null && cursor.moveToFirst()) {
+                    result = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+                }
+            } finally {
+                cursor.close();
+            }
+        }
+        if (result == null) {
+            result = uri.getPath();
+            int cut = result.lastIndexOf('/');
+            if (cut != -1) {
+                result = result.substring(cut + 1);
+            }
+        }
+        return result;
+    }*/
 }
