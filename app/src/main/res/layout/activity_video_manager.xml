@@ -68,6 +68,6 @@
         android:textSize="32sp"
         android:fontFamily="@font/mts_sans_medium"
         android:text="@string/back"
-        android:onClick="backFromVideoPage"/>
+        android:onClick="backToMainPage"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -164,13 +164,14 @@ public class VideoManagerActivity extends AppCompatActivity {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                backFromVideoPage(view);
+                backToMainPage(view);
             }
         });
     }
 
-    public void backFromVideoPage(View view){
-
+    public void backToMainPage(View view){
+        Intent mainPageIntent = new Intent(this, MainActivity.class);
+        startActivity(mainPageIntent);
     }
     private void uploadVideoToServer(Uri videoUri, int videoIndex){
         try{

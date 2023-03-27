@@ -44,20 +44,13 @@
             android:textColor="@color/black"
             android:text="@string/app_name_eye"/>
 
-        <Button
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="48dp"
             android:layout_height="52dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="25dp"
-            android:text="test"
-            android:onClick="switchMainLayoutDrawer"/>
-        <!--<androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="48dp"
-            android:layout_height="52dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="25dp">
+            android:onClick="switchMainLayoutDrawer">
 
             <View
                 android:id="@+id/line1"
@@ -88,7 +81,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-        -->
+
 
     </RelativeLayout>
 
@@ -107,9 +100,75 @@
                 android:layout_height="5dp"
                 android:background="@color/dark_red" />
 
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="40dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:textAlignment="center"
+                        android:gravity="center"
+                        android:fontFamily="@font/mts_sans_bold"
+                        android:textSize="35sp"
+                        android:textColor="@color/black"
+                        android:text="@string/our_service"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:textAlignment="center"
+                        android:gravity="center"
+                        android:fontFamily="@font/mts_sans_bold"
+                        android:textSize="35sp"
+                        android:textColor="@color/dark_red"
+                        android:text="@string/watch_movies"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="30dp"
+                        android:textAlignment="center"
+                        android:gravity="center"
+                        android:fontFamily="arial"
+                        android:textSize="25sp"
+                        android:textColor="@color/black"
+                        android:text="@string/agitate"/>
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_marginTop="30dp"
+                        android:backgroundTint="@color/dark_red"
+                        android:textSize="32sp"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/mts_sans_medium"
+                        android:text="@string/start_now"
+                        android:onClick="goToVideoManager"/>
+
+                    <VideoView
+                        android:id="@+id/example_video_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+                        android:layout_marginTop="30dp"
+                        />
+
+                </LinearLayout>
+
+            </ScrollView>
+
         </LinearLayout>
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_height="match_parent"
             android:layout_width="match_parent"
             android:layout_marginLeft="-64dp"
@@ -117,16 +176,33 @@
             android:background="@color/white">
 
             <TextView
-                android:layout_width="300dp"
+                android:id="@+id/how_it_works_text"
+                android:layout_width="match_parent"
                 android:layout_height="200dp"
+                android:layout_marginTop="100dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
                 android:textAlignment="center"
                 android:gravity="center"
                 android:fontFamily="@font/mts_sans_bold"
                 android:textSize="50sp"
                 android:textColor="@color/black"
                 android:text="@string/how_it_works"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                app:layout_constraintTop_toBottomOf="@id/how_it_works_text"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:textAlignment="center"
+                android:gravity="top"
+                android:fontFamily="@font/mts_sans_bold"
+                android:textSize="50sp"
+                android:textColor="@color/black"
+                android:text="@string/developers"/>
 
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </androidx.drawerlayout.widget.DrawerLayout>

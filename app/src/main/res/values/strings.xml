@@ -4,8 +4,15 @@
     <string name="app_name_eye">Eye</string>
     <string name="how_it_works">Как это работает?</string>
     <string name="developers">Разработчики</string>
+    <string name="our_service">Наш сервис позволяет людям с проблемным зрением</string>
+    <string name="watch_movies">комфортно смотреть кино.</string>
+    <string name="agitate">Посмотрите ниже пример нашей работы, загрузите файл и Вы получаете адаптированное видео!</string>
+    <string name="work_principe">Принцип работы</string>
     <string name="back">Назад</string>
     <string name="load">Загрузить</string>
     <string name="loaded_files">Загруженные файлы</string>
     <string name="loading">Загружается</string>
+    <string name="start_now">Начните сейчас</string>
+    <string name="learn_more">Узнать больше</string>
+
 </resources>
