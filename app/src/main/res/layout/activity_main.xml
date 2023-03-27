@@ -98,9 +98,22 @@
         android:layout_height="match_parent">
 
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="@color/dark_red" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_height="match_parent"
             android:layout_width="match_parent"
             android:layout_marginLeft="-64dp"
+            android:layout_gravity="left"
             android:background="@color/white">
 
             <TextView
@@ -112,18 +125,6 @@
                 android:textSize="50sp"
                 android:textColor="@color/black"
                 android:text="@string/how_it_works"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:background="@color/dark_red" />
 
         </LinearLayout>
 

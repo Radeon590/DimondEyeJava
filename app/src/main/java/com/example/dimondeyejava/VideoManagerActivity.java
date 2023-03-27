@@ -3,6 +3,7 @@ package com.example.dimondeyejava;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.res.ResourcesCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Context;
 import android.content.Intent;
@@ -23,21 +24,26 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.VideoView;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URI;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class VideoManagerActivity extends AppCompatActivity {
-
     private static final int SELECT_VIDEO = 1;
     private static ArrayList<Video> videoArrayList = new ArrayList<Video>();
+
+    private static String serverUrlPath = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_manager);
         downloadVideosList();
     }
-
     public void showFiles(View view){
         Intent fileSearcherIntent = new Intent(Intent.ACTION_GET_CONTENT);
         fileSearcherIntent.setType("video/*");
@@ -49,11 +55,11 @@ public class VideoManagerActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, imageReturnedIntent);
         //
         if(requestCode == SELECT_VIDEO && resultCode == RESULT_OK){
-            addVideo(getPath(imageReturnedIntent.getData()));
+            addVideoFromFiles(imageReturnedIntent.getData());
         }
     }
-
-    private void addVideo(String videoPath){
+    private void addVideoFromFiles(Uri videoUri){
+        String videoPath = getPath(videoUri);
         StringBuilder stringBuilder = new StringBuilder("");
         for(int i = videoPath.length() - 1; i >= 0; i--){
             if(videoPath.charAt(i) == '/'){
@@ -62,10 +68,12 @@ public class VideoManagerActivity extends AppCompatActivity {
             stringBuilder.append(videoPath.charAt(i));
         }
         String fileName = stringBuilder.toString();
-        addVideoToLayout(fileName, getResources().getString(R.string.loading));
+        //
+        videoArrayList.add(new Video(fileName, "Загружается", addVideoToLayout(fileName, getResources().getString(R.string.loading))));
+        uploadVideoToServer(videoUri, videoArrayList.size() - 1);
     }
 
-    private void addVideoToLayout(String fileName, String status){
+    private int addVideoToLayout(String fileName, String status){
         TextView nameText = new TextView(this);
         nameText.setText(fileName);
         nameText.setGravity(Gravity.CENTER);
@@ -103,6 +111,14 @@ public class VideoManagerActivity extends AppCompatActivity {
         constraintLayout.setLayoutParams(constraintLayoutParams);
         constraintLayout.addView(nameText);
         constraintLayout.addView(statusText);
+        int constraintLayoutId = View.generateViewId();
+        constraintLayout.setId(constraintLayoutId);
+        constraintLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                playVideo(view);
+            }
+        });
         //
         View lineView = new View(this);
         lineView.setBackgroundColor(getResources().getColor(R.color.dark_red, null));
@@ -115,10 +131,65 @@ public class VideoManagerActivity extends AppCompatActivity {
         LinearLayout linearLayout = findViewById(R.id.videos_list);
         linearLayout.addView(constraintLayout);
         linearLayout.addView(lineView);
+        return constraintLayoutId;
     }
 
-    private void uploadVideoToServer(){
+    public void playVideo(View view){
+        Video video = null;
+        boolean found = false;
+        for(int i = 0; i < videoArrayList.size(); i++){
+            video = videoArrayList.get(i);
+            if(video.layoutId == view.getId()){
+                found = true;
+                break;
+            }
+        }
+        if(found){
+            DrawerLayout drawerLayout = findViewById(R.id.videos_drawer);
+            drawerLayout.open();
+            Button backButton = findViewById(R.id.back_button);
+            backButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    backFromVideoDrawer(view);
+                }
+            });
+            VideoView videoView = findViewById(R.id.video_view);
+            videoView.setVideoPath((new StringBuilder(serverUrlPath)).append("/video/").append(video.name).toString());
+            videoView.start();
+        }
+    }
 
+    public void backFromVideoDrawer(View view){
+        VideoView videoView = findViewById(R.id.video_view);
+        videoView.stopPlayback();
+        videoView.resume();
+        DrawerLayout drawerLayout = findViewById(R.id.videos_drawer);
+        drawerLayout.close();
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                backFromVideoPage(view);
+            }
+        });
+    }
+
+    public void backFromVideoPage(View view){
+
+    }
+    private void uploadVideoToServer(Uri videoUri, int videoIndex){
+        try{
+            URL url = new URL(serverUrlPath);
+            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+            //
+
+            //
+            httpURLConnection.disconnect();
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void downloadVideosList(){
