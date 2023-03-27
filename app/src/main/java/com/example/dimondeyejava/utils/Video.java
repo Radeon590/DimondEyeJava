@@ -1,4 +1,4 @@
-package com.example.dimondeyejava;
+package com.example.dimondeyejava.utils;
 
 public class Video {
     public String name;

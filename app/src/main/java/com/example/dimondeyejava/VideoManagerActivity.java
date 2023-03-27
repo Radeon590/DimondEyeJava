@@ -5,31 +5,26 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.Typeface;
-import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.provider.OpenableColumns;
-import android.text.Layout;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.VideoView;
 
+import com.example.dimondeyejava.utils.Video;
+
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -144,7 +139,7 @@ public class VideoManagerActivity extends AppCompatActivity {
                 break;
             }
         }
-        if(found){
+        if(found && video.status == "Готово"){
             DrawerLayout drawerLayout = findViewById(R.id.videos_drawer);
             drawerLayout.open();
             Button backButton = findViewById(R.id.back_button);
@@ -181,10 +176,16 @@ public class VideoManagerActivity extends AppCompatActivity {
         try{
             URL url = new URL(serverUrlPath);
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+            httpURLConnection.setDoInput(true);
+            httpURLConnection.setDoOutput(true);
+            httpURLConnection.setUseCaches(false);
+            httpURLConnection.setRequestMethod("POST");
             //
+            try{
 
-            //
-            httpURLConnection.disconnect();
+            } finally{
+                httpURLConnection.disconnect();
+            }
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
@@ -193,7 +194,33 @@ public class VideoManagerActivity extends AppCompatActivity {
     }
 
     private void downloadVideosList(){
+        URL url;
+        HttpURLConnection connection = null;
 
+        try {
+            url = new URL("http://example.com");
+            connection = (HttpURLConnection) url.openConnection();
+            //
+            BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+
+            StringBuilder sb = new StringBuilder();
+            String line;
+            while ((line = br.readLine()) != null) {
+                sb.append(line).append('\n');
+            }
+
+            // use the string builder directly,
+            // or convert it into a String
+            String body = sb.toString();
+            //TODO:parse body and find list of names
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                connection.disconnect();
+            }
+        }
     }
 
     public String getPath(Uri uri) {
