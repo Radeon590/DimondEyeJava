@@ -20,12 +20,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setUpVideoPlayer(){
-        VideoView videoView = findViewById(R.id.example_video_view);
+        /*VideoView videoView = findViewById(R.id.example_video_view);
         videoView.setVideoURI(Uri.parse("https://www.youtube.com/watch?v=q1NjNA1GWBs&t=1s"));
         //videoView.setVideoPath("https://www.youtube.com/watch?v=q1NjNA1GWBs&t=1s");
         MediaController mediaController = new MediaController(this);
         videoView.setMediaController(mediaController);
-        mediaController.setMediaPlayer(videoView);
+        mediaController.setMediaPlayer(videoView);*/
     }
     public void switchMainLayoutDrawer(View view){
         DrawerLayout drawerLayout = findViewById(R.id.main_layout_drawer);

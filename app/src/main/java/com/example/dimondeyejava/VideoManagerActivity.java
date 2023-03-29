@@ -37,7 +37,8 @@ public class VideoManagerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_manager);
-        downloadVideosList();
+        //TODO: make downloading
+        //downloadVideosList();
     }
     public void showFiles(View view){
         Intent fileSearcherIntent = new Intent(Intent.ACTION_GET_CONTENT);
@@ -65,7 +66,7 @@ public class VideoManagerActivity extends AppCompatActivity {
         String fileName = stringBuilder.toString();
         //
         videoArrayList.add(new Video(fileName, "Загружается", addVideoToLayout(fileName, getResources().getString(R.string.loading))));
-        uploadVideoToServer(videoUri, videoArrayList.size() - 1);
+        //uploadVideoToServer(videoUri, videoArrayList.size() - 1);
     }
 
     private int addVideoToLayout(String fileName, String status){
